@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<meta charset="UTF-8">
+    <title>AMOR</title>
+    <style>
+      /* CSS para estilizar a página */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        text-align: center;
+        padding: 50px;
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      #botoes {
+        margin-top: 20px;
+      }
+
+      .botao-resposta {
+        background-color: #ff69b4;
+        color: #fff;
+        font-size: 20px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 0 10px;
+      }
+
+      .botao-nao {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        background-color: #ff69b4;
+        color: #fff;
+        font-size: 20px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: transform 0.5s;
+      }
+
+      .botao-nao:hover {
+        transform: translateX(-50px);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Cuzinho hoje??</h1>
+    <div id="botoes">
+      <button class="botao-resposta" id="botao-sim">Sim</button>
+      <button class="botao-resposta" id="botao-nao">Não</button>
+    </div>
+
+    <script>
+      // JavaScript para exibir mensagem de acordo com a resposta
+      const botaoSim = document.getElementById("botao-sim");
+      const botaoNao = document.getElementById("botao-nao");
+
+      const coracoes = []; // array para armazenar todos os corações criados
+
+      function exibirMensagem(resposta) {
+        const mensagem = document.createElement("p");
+        const coracao = document.createElement("img");
+        mensagem.style.fontSize = "24px";
+        mensagem.style.marginTop = "20px";
+        coracao.src = "https://i.pinimg.com/736x/9d/f5/67/9df5672fd7c870f45adf538f9bf9b02e.jpg";
+        coracao.style.position = "absolute";
+        coracao.style.width = "150px";
+        coracao.style.transition = "all 0.5s";
+
+        if (resposta === "sim") {
+          mensagem.textContent = "Dale sexo!";
+
+          // Posiciona o coração em uma posição aleatória
+          const x = Math.floor(Math.random() * window.innerWidth);
+          const y = Math.floor(Math.random() * window.innerHeight);
+          coracao.style.top = y + "px";
+          coracao.style.left = x + "px";
+          // Adiciona o coração à página
+          document.body.appendChild(coracao);
+          coracoes.push(coracao); // adiciona o coração ao array
+
+          // Remove todos os corações após alguns segundos
+          setTimeout(function() {
+            coracoes.forEach(c => {
+              c.style.opacity = 0;
+              c.style.top = "-100px";
+              setTimeout(function() {
+                c.remove();
+              }, 500);
+            });
+            mensagem.remove();
+            coracoes.length = 0;
+            exibirMensagem("sim"); // esvazia o array
+          }, 600);
+        }
+
+        document.body.appendChild(mensagem);
+      }
+
+      botaoSim.addEventListener("click", function () {
+          exibirMensagem("sim");
+      });
+
+      botaoNao.addEventListener("click", function () {
+        exibirMensagem("nao");
+      });
+
+      botaoNao.addEventListener("mouseover", function () {
+        var x = Math.floor(Math.random()*500)+1;
+        var y = Math.floor(Math.random()*500)+1;
+        botaoNao.style.transform = "translate(" + x + "px, " + y + "px)";
+      });
+
+      botaoNao.addEventListener("click", function () {
+        var x = Math.floor(Math.random()*500)+1;
+        var y = Math.floor(Math.random()*500)+1;
+        botaoNao.style.transform = "translate(" + x + "px, " + y + "px)";
+      });
+    </script>
+  </body>
+</html>
